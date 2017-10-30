@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="PL-pl">
 
 <head>
 	<title>GDMS</title>
@@ -8,10 +8,27 @@
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type = "text/css"/>
 </head>
 
-<body class="body" style="background-color:#f6f6f6">
+<body class="body" style="background-color:#C2BFBF">
 	<div>
-	   {% block content %}
-	   {% endblock %}	
+		<h1 style="text-align: center">Games Database Management System</h1>
+		<div class="container">
+    		<div class="row">
+        		<div class="col" style="width: 30%; margin: 0 auto; text-align: center;">
+            		<div class="form-1login">
+            			<h4>Login</h4>
+            				<input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+            				</br>
+            				<input type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+            				</br>
+            				<div class="wrapper">
+            					<span class="group-btn">     
+                					<a href="browse.html" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
+            					</span>
+            				</div>
+            		</div>
+       			</div>
+    		</div>
+		</div>
 	</div>
 </body>
 
