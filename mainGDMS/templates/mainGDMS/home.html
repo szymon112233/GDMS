@@ -1,4 +1,25 @@
-{% extends "mainGDMS/header.html" %}
-{% block content %}
-<p>Hey! Welcome to my website! Well, I wasn't expecting guests. Um, my name is Szymon. I am a programmer.</p>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="PL-pl">
+
+<head>
+	<meta charset="utf-8" />
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type = "text/css"/>
+    {% block head %}
+
+    {% endblock %}
+    <title>GDMS</title>
+
+
+</head>
+
+<body class="body" style="background-color:#C2BFBF">
+	
+    <h1 style="text-align: center">Games Database Management System</h1>
+    {% block body %}        
+
+    {% endblock %}
+
+</body>
+
+</html>

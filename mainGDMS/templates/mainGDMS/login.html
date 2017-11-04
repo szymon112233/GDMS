@@ -1,0 +1,33 @@
+{% extends 'mainGDMS/home.html' %}
+
+
+    {% block head %}
+
+    <title>GDMS login page</title>
+
+    {% endblock %}
+
+
+
+{% block body %}
+<div>
+	<div class="container">
+		<div class="row">
+    		<div class="col" style="width: 30%; margin: 0 auto; text-align: center;">
+        		<div class="form-1login">
+        			<h4>Login</h4>
+                        <form method="post">
+                        {% csrf_token %}
+                        <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+                        </br>
+                        <input type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+                        </br>
+                        <button type="submit" class="btn btn-primary btn-md" >Sign in</button>
+                        </form>
+        		</div>
+   			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
