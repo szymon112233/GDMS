@@ -3,6 +3,10 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+class tableNames(models.Model):
+	stringName = models.CharField(max_length=32, primary_key=True, unique=True)
+	dbName = models.CharField(max_length=32, unique=True)
+
 class skill(models.Model):
 	name = models.CharField(max_length=32, unique=True)
 	desc = models.CharField(max_length=256)
