@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.db.models.fields.reverse_related import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -17,11 +18,23 @@ def browse(request):
 
 @login_required(login_url='/')
 def browseTable(request, tableName = None):
-    data = list(item.objects.all())
-    print item._meta.get_fields()
 
-    args = {'name': tableName, 'collumns': '', 'data': data}
-    return render(request, 'mainGDMS/browse.html', args)
+    if list(tableNames.objects.filter(stringName=tableName)):
+        modelName = list(tableNames.objects.filter(stringName=tableName))[0].dbName
+        print modelName
+        data = list()
+        exec("data = list(" +modelName +".objects.all())")
+        print data
+        collumns = list()
+        fieldsTouple = 0
+        exec ("fieldsTouple = " + modelName + "._meta.get_fields()")
+        for field in fieldsTouple:
+            if not isinstance(field, (ManyToManyRel, ManyToOneRel, OneToOneRel)):
+                collumns.append(field)
+        args = {'name': tableName, 'collumns': collumns, 'data': data}
+        return render(request, 'mainGDMS/browse.html', args)
+    else:
+        return render(request, 'mainGDMS/404.html')
 
 @login_required(login_url='/')
 def edit(request):

@@ -19,15 +19,16 @@
 		  <br>
 			<div class="well bs-sidebar" id="sidebar" style="background-color:#412525">
 			  <ul class="nav nav-pills nav-stacked">
-				<li><a href='/edit' style="color:#DC143C">Edytuj</a></li>
-				<li><a href='/browse/items'>Items</a></li>
-				<li><a href='/'>Tabela2</a></li>
-				<li><a href='/'>Tabela3</a></li>
-				<li><a href='/'>Tabela4</a></li>
-				<li><a href='/'>Tabela5</a></li>
-				<li><a href='/'>Tabela6</a></li>
-				<li><a href='/'>Tabela7</a></li>
-				<li><a href='/'>Tabela8</a></li>
+              <li><a href='/edit' style="color:#DC143C">Edytuj</a></li>
+              <li><a href='/browse/item'>Items</a></li>
+              <li><a href='/browse/skills'>Skills</a></li>
+              <li><a href='/browse/players'>Players</a></li>
+              <li><a href='/browse/character'>Characters</a></li>
+              <li><a href='/browse/npcs'>Npcs</a></li>
+              <li><a href='/browse/config'>Config</a></li>
+              <li><a href='/browse/locale'>Localization</a></li>
+              <li><a href='/browse/inv'>Inventories</a></li>
+              <li><a href='/browse/skillbook'>Skillbooks</a></li>
 			    <li><a href='/logout'>Wyloguj</a></li>
 			  </ul>
 			</div> 
@@ -35,109 +36,47 @@
 		  <br>
 		  <br>
         {{name}}
+
 		<table class="table-bordered" width="70%">
 		  <thead>
 		    <tr>
-		      <th scope="col">#</th>
-		      <th scope="col">Data1</th>
-		      <th scope="col">Data2</th>
-		      <th scope="col">Data3</th>
-		      <th scope="col">Data4</th>
-		      <th scope="col">Data5</th>
-		      <th scope="col">Data6</th>
+                {% for obj in collumns %}
+                <h5><th scope="col">{{ obj }}</th></h5>
+                {% endfor %}
 		    </tr>
 		  </thead>
 		  <tbody>
+            {% for obj in data%}
 		    <tr>
-		      <th scope="row">1</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
+                {% if name == 'item' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.name}}</td>
+                  <td>{{obj.desc}}</td>
+                  <td>{{obj.type}}</td>
+                {% elif name == 'skills' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.name}}</td>
+                  <td>{{obj.desc}}</td>
+                  <td>{{obj.type}}</td>
+                {% elif name == 'item' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.name}}</td>
+                  <td>{{obj.desc}}</td>
+                  <td>{{obj.type}}</td>
+                {% elif name == 'item' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.name}}</td>
+                  <td>{{obj.desc}}</td>
+                  <td>{{obj.type}}</td>
+                {% elif name == 'item' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.name}}</td>
+                  <td>{{obj.desc}}</td>
+                  <td>{{obj.type}}</td>
+                {%endif%}
+
 		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">4</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">5</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">6</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">7</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">8</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">9</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">10</th>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		      <td>DATA</td>
-		    </tr>
+            {% endfor %}
 		  </tbody>
 		</table>	
 	</div>
