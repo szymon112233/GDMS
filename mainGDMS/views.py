@@ -30,7 +30,9 @@ def browseTable(request, tableName = None):
         exec ("fieldsTouple = " + modelName + "._meta.get_fields()")
         for field in fieldsTouple:
             if not isinstance(field, (ManyToManyRel, ManyToOneRel, OneToOneRel)):
+                print field
                 collumns.append(field)
+
         args = {'name': tableName, 'collumns': collumns, 'data': data}
         return render(request, 'mainGDMS/browse.html', args)
     else:
