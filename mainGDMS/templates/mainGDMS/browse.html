@@ -58,23 +58,40 @@
                   <td>{{obj.name}}</td>
                   <td>{{obj.spriteID}}</td>
                   <td>{{obj.skills}}</td>
-                {% elif name == 'item' %}
+                {% elif name == 'skills' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.name}}</td>
                   <td>{{obj.desc}}</td>
-                  <td>{{obj.type}}</td>
-                {% elif name == 'item' %}
+                  <td>{{obj.req_lvl}}</td>
+                  <td>{{obj.damage}}</td>
+                  <td>{{obj.is_targeted}}</td>
+                  <td>{{obj.is_aoe}}</td>
+                  <td>{{obj.is_passive}}</td>
+                {% elif name == 'players' %}
                   <th scope="row">{{obj.id}}</th>
-                  <td>{{obj.name}}</td>
-                  <td>{{obj.desc}}</td>
-                  <td>{{obj.type}}</td>
-                {% elif name == 'item' %}
+                  <td>{{obj.user_id}}</td>
+                {% elif name == 'characters' %}
                   <th scope="row">{{obj.id}}</th>
-                  <td>{{obj.name}}</td>
-                  <td>{{obj.desc}}</td>
-                  <td>{{obj.type}}</td>
+                  <td>{{obj.owner_id}}</td>
+                {% elif name == 'config' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.exp_mmult}}</td>
+                  <td>{{obj.database_ver}}</td>
+                  <td>{{obj.game_ver}}</td>
+                {% elif name == 'locale' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.default_transl}}</td>
+                  <td>{{obj.en_transl}}</td>
+                  <td>{{obj.pl_transl}}</td>
+                {% elif name == 'inv' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.item_base_id}}</td>
+                  <td>{{obj.item_owner_id}}</td>
+                {% elif name == 'skillbook' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.skill_base_id}}</td>
+                  <td>{{obj.skill_owner_id}}</td>
                 {%endif%}
-
 		    </tr>
             {% endfor %}
 		  </tbody>
