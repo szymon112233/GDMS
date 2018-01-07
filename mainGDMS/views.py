@@ -60,20 +60,21 @@ def editTable(request, tableName = None):
             exec ("queryset = " + modelName + ".objects.all()")
             print queryset
             if request.POST:
-                book_form = ItemForm(request.POST)
+                item_form = ItemForm(request.POST)
 
-            if book_form.is_valid():
+            if item_form.is_valid():
                 book = item.objects.all()
-                book_form = ItemForm(request.POST, instance=book)
-                book_form.save()
-                return redirect('/index/')
-        else:
-            book = Book.objects.get(pk=book_id)
-            book_form = BookForm(instance=book)
-
-            return render_to_response('editbook.html', {'form': book_form}, context_instance=RequestContext(request))
+                item_form = ItemForm(request.POST, instance=book)
+                item_form.save()
+                #return redirect('/index/')
         else:
             return render(request, 'mainGDMS/404.html')
+            #book = Book.objects.get(pk=book_id)
+            #book_form = BookForm(instance=book)
+
+            #return render_to_response('editbook.html', {'form': book_form}, context_instance=RequestContext(request))
+        #else:
+         #   return render(request, 'mainGDMS/404.html')
 
 @login_required(login_url='/')
 def saveTable(request, tableName=None):

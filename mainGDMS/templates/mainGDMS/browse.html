@@ -36,7 +36,6 @@
 		  </div>
 		  <br>
 		  <br>
-        {{name}}
 
 		<table class="table-bordered" width="70%">
 		  <thead>
@@ -88,6 +87,15 @@
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.item_base_id}}</td>
                   <td>{{obj.item_owner_id}}</td>
+                {% elif name == 'enemies' %}
+                  <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.name}}</td>
+                  <td>{{obj.modelID}}</td>
+                  <td>{{obj.speed}}</td>
+                  <td>{{obj.}}</td>
+                  <td>{{obj.health}}</td>
+                  <td>{{obj.vision_range}}</td>
+                  <td>{{obj.chase_range}}</td>
                 {% elif name == 'skillbook' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.skill_base_id}}</td>
