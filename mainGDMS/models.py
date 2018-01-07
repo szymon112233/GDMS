@@ -22,9 +22,8 @@ class item(models.Model):
 	name = models.CharField(max_length=64, unique=True)
 	desc = models.CharField(max_length=256)
 	type = models.CharField(max_length=64)
+	damage = models.FloatField(default=0)
 	# more data here?
-
-
 
 class users_data(models.Model):
 	login = models.CharField(max_length=16, primary_key=True, unique=True)
@@ -45,6 +44,14 @@ class npc(models.Model):
 	spriteID = models.IntegerField(default=0)
 	skills = models.ManyToManyField(skill)
 
+class enemy(models.Model):
+	name = models.CharField(max_length=64)
+	modelID = models.IntegerField(default=0)
+	damage = models.FloatField(default=0)
+	speed = models.FloatField(default=1)
+	health = models.FloatField(default=1)
+	vision_range = models.FloatField(default=10)
+	chase_range = models.FloatField(default=10)
 
 
 class skillbook(models.Model):
@@ -58,11 +65,10 @@ class inventory(models.Model):
 	# local item modifications here?
 
 
-
 class configs(models.Model):
-	exp_mult = models.FloatField(default=1)
 	database_ver = models.FloatField()
 	game_ver = models.FloatField(default=0.1)
+	exp_mult = models.FloatField(default=1)
 
 class logs(models.Model):
 	date = models.DateTimeField()
