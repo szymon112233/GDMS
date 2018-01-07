@@ -18,8 +18,8 @@
 
 		  <br>
 			<div class="well bs-sidebar" id="sidebar" style="background-color:#412525">
+              <h5>Wybierz tabelę do edycji:</h5>
 			  <ul class="nav nav-pills nav-stacked">
-              <li><a href='/edit' style="color:#DC143C">Edytuj</a></li>
               <li><a href='/browse/item'>Items</a></li>
               <li><a href='/browse/skills'>Skills</a></li>
               <li><a href='/browse/players'>Players</a></li>
@@ -38,11 +38,16 @@
 		  <br>
 
 		<table class="table-bordered" width="70%">
+            <h2 style="text-align: center">{{viewName}}</h2>
+
+          <a href=/edit/{{name}}><span class="glyphicon glyphicon-plus"></span>Add new</a>
+
 		  <thead>
 		    <tr>
                 {% for obj in collumns %}
                 <h5><th scope="col">{{ obj }}</th></h5>
                 {% endfor %}
+                <h5><th scope="col">Edit</th></h5>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -53,6 +58,7 @@
                   <td>{{obj.name}}</td>
                   <td>{{obj.desc}}</td>
                   <td>{{obj.type}}</td>
+                  <td>{{obj.damage}}</td>
                 {% elif name == 'npcs' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.name}}</td>
@@ -72,12 +78,13 @@
                   <td>{{obj.user_id}}</td>
                 {% elif name == 'characters' %}
                   <th scope="row">{{obj.id}}</th>
+                  <td>{{obj.name}}</td>
                   <td>{{obj.owner_id}}</td>
                 {% elif name == 'config' %}
                   <th scope="row">{{obj.id}}</th>
-                  <td>{{obj.exp_mmult}}</td>
                   <td>{{obj.database_ver}}</td>
                   <td>{{obj.game_ver}}</td>
+                  <td>{{obj.exp_mmult}}</td>
                 {% elif name == 'locale' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.default_transl}}</td>
@@ -91,8 +98,8 @@
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.name}}</td>
                   <td>{{obj.modelID}}</td>
+                  <td>{{obj.damage}}</td>
                   <td>{{obj.speed}}</td>
-                  <td>{{obj.}}</td>
                   <td>{{obj.health}}</td>
                   <td>{{obj.vision_range}}</td>
                   <td>{{obj.chase_range}}</td>
@@ -101,10 +108,13 @@
                   <td>{{obj.skill_base_id}}</td>
                   <td>{{obj.skill_owner_id}}</td>
                 {%endif%}
+                  <td><a href=/edit/{{name}}_{{obj.id}}><span class="glyphicon glyphicon-pencil"></span></a>/
+                  <a href=/remove/{{name}}_{{obj.id}}><span class="glyphicon glyphicon-trash"></span></a></td>
 		    </tr>
             {% endfor %}
 		  </tbody>
-		</table>	
+		</table>
+
 	</div>
 </body>
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.db.models.fields.reverse_related import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -15,7 +15,7 @@ def index(request):
 
 @login_required(login_url='/')
 def browse(request):
-    return render(request, 'mainGDMS/browse.html')
+    return browseTable(request, 'item')
 
 @login_required(login_url='/')
 def browseTable(request, tableName = None):
@@ -34,56 +34,95 @@ def browseTable(request, tableName = None):
                 print field
                 collumns.append(field)
 
-        args = {'name': tableName, 'collumns': collumns, 'data': data}
+        args = {'name': tableName, 'viewName': tableName.capitalize(), 'collumns': collumns, 'data': data}
         return render(request, 'mainGDMS/browse.html', args)
     else:
         return render(request, 'mainGDMS/404.html')
 
 @login_required(login_url='/')
-def edit(request):
+def edit(request, whatToEdit = None):
+    print whatToEdit
     user = request.user
     if user.is_staff:
-        return render(request, 'mainGDMS/edit.html')
-    else:
-        return render(request, 'mainGDMS/permissionDenied.html')
-
-@login_required(login_url='/')
-def editTable(request, tableName = None):
-    user = request.user
-    if not user.is_staff:
-        return render(request, 'mainGDMS/permissionDenied.html')
-    else:
-        if list(tableNames.objects.filter(stringName=tableName)):
-            modelName = list(tableNames.objects.filter(stringName=tableName))[0].dbName
-            print modelName
-            queryset = 0
-            exec ("queryset = " + modelName + ".objects.all()")
-            print queryset
-            if request.POST:
-                item_form = ItemForm(request.POST)
-
-            if item_form.is_valid():
-                book = item.objects.all()
-                item_form = ItemForm(request.POST, instance=book)
-                item_form.save()
-                #return redirect('/index/')
+        form = EnemiesForm()
+        splitType = whatToEdit.split('_')
+        print splitType
+        tableName = ''
+        objectID = 0
+        isNew = False
+        if (len(splitType) == 2):
+            tableName = splitType[0]
+            objectID = int(splitType[1])
+        elif (len(splitType) == 1):
+            tableName = splitType[0]
+            isNew = True
         else:
             return render(request, 'mainGDMS/404.html')
-            #book = Book.objects.get(pk=book_id)
-            #book_form = BookForm(instance=book)
 
-            #return render_to_response('editbook.html', {'form': book_form}, context_instance=RequestContext(request))
-        #else:
-         #   return render(request, 'mainGDMS/404.html')
+        print tableName
+        print objectID
+
+        if (isNew):
+            if request.method == "POST":
+                tempTableName = tableName.capitalize()
+                exec ('form = ' + tempTableName + 'Form(request.POST)')
+                if form.is_valid():
+                    record = form.save(commit=False)
+                    record.save()
+                    return redirect('/browse/' + tableName)
+            else:
+                tempTableName = tableName.capitalize()
+                exec ('form = ' + tempTableName + 'Form()')
+            return render(request, 'mainGDMS/editRecord.html', {'name': tempTableName, 'form': form})
+        else:
+            if list(tableNames.objects.filter(stringName=tableName)):
+                modelName = list(tableNames.objects.filter(stringName=tableName))[0].dbName
+                print modelName
+                obj = ''
+                exec ("obj = " + modelName + ".objects.get(pk=objectID)")
+                print obj
+                if request.method == "POST":
+                    tempTableName = tableName.capitalize()
+                    exec ('form = ' + tempTableName + 'Form(request.POST, instance=obj)')
+                    if form.is_valid():
+                        record = form.save(commit=False)
+                        record.save()
+                        return redirect('/browse/' + tableName)
+                else:
+                    tempTableName = tableName.capitalize()
+                    exec ('form = ' + tempTableName + 'Form(instance=obj)')
+                    return render(request, 'mainGDMS/editRecord.html', {'name': tempTableName, 'form': form})
+            else:
+                return render(request, 'mainGDMS/404.html')
+
+    else:
+        return render(request, 'mainGDMS/permissionDenied.html')
+
+
+
 
 @login_required(login_url='/')
-def saveTable(request, tableName=None):
+def removeRecord(request, whatToRemove = None):
     user = request.user
     if not user.is_staff:
         return render(request, 'mainGDMS/permissionDenied.html')
     else:
-        return render(request, 'mainGDMS/edit.html')
-
+        splitType = whatToRemove.split('_')
+        if (len(splitType) == 2):
+            tableName = splitType[0]
+            objectID = int(splitType[1])
+            if list(tableNames.objects.filter(stringName=tableName)):
+                modelName = list(tableNames.objects.filter(stringName=tableName))[0].dbName
+                print modelName
+                obj = ''
+                exec ("obj = " + modelName + ".objects.get(pk=objectID)")
+                print obj
+                obj.delete()
+                return redirect('/browse/' + tableName)
+            else:
+                return render(request, 'mainGDMS/404.html')
+        else:
+            return render(request, 'mainGDMS/404.html')
 
 
 def showLogout(request):
@@ -92,18 +131,4 @@ def showLogout(request):
         return render(request, 'mainGDMS/logout.html')
     else:
         return render(request, 'mainGDMS/login.html')
-
-def editbook(request,book_id):
-
-    queryset = Book.objects.filter(book_id=book_id)
-    if request.POST:
-        form=BookForm(request.POST,instance=queryset)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-    else:
-        form=BookForm(instance=queryset)
-        template = 'editbook.html'
-        book = { 'form':form }
-    return render_to_response(template, book , RequestContext(request))
 
