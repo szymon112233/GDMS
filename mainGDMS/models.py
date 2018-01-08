@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.conf import settings
 from random import *
 
 class tableNames(models.Model):
@@ -39,7 +40,8 @@ class users_data(models.Model):
 		return self.login
 
 class player(models.Model):
-	user = models.OneToOneField(users_data, on_delete=models.CASCADE)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	#user = models.OneToOneField(users_data, on_delete=models.CASCADE)
 	# more data here??
 
 	def __str__(self):
