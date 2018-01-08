@@ -102,7 +102,13 @@ def edit(request, whatToEdit = None):
     else:
         return render(request, 'mainGDMS/permissionDenied.html')
 
-
+@login_required(login_url='/')
+def tryRemoveRecord(request, whatToRemove = None):
+    user = request.user
+    if not user.is_staff:
+        return render(request, 'mainGDMS/permissionDenied.html')
+    else:
+        return render(request, 'mainGDMS/confirm.html',{'whatToRemove': whatToRemove} )
 
 
 @login_required(login_url='/')

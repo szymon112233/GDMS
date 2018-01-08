@@ -1,0 +1,25 @@
+{% extends 'mainGDMS/home.html' %}
+
+
+    {% block head %}
+
+    <title>Confirm</title>
+
+    {% endblock %}
+
+
+
+{% block body %}
+<div>
+	<div class="container">
+		<div class="row">
+    		<div class="col" style="width: 30%; margin: 0 auto; text-align: center;">
+        		Czy jesteś pewien że chcesz usunąć ten element?
+                <button type="button" onclick="window.location.href='/remove/{{whatToRemove}}'" class="save btn btn-default">Jasne!</button>
+                <button type="button" onclick="window.location.href='/browse'" class="save btn btn-default">Nieeeeeeee!!!!!</button>
+   			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
