@@ -25,12 +25,12 @@ class PlayersForm(ModelForm):
 class CharacterForm(ModelForm):
     class Meta:
         model = character
-        fields = ('name', 'owner', 'skills', 'items')
+        fields = ('name', 'owner')
 
 class NpcsForm(ModelForm):
     class Meta:
         model = npc
-        fields = ('name', 'spriteID', 'skills')
+        fields = ('name', 'spriteID')
 
 class SkillbookForm(ModelForm):
     class Meta:

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render,redirect
 from django.db.models.fields.reverse_related import *
+from django.db.models.fields.related import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -30,7 +31,7 @@ def browseTable(request, tableName = None):
         fieldsTouple = 0
         exec ("fieldsTouple = " + modelName + "._meta.get_fields()")
         for field in fieldsTouple:
-            if not isinstance(field, (ManyToManyRel, ManyToOneRel, OneToOneRel)):
+            if not isinstance(field, (ManyToManyRel, ManyToOneRel, OneToOneRel, ManyToManyField, )):
                 print field
                 collumns.append(field)
 
@@ -80,7 +81,7 @@ def edit(request, whatToEdit = None):
                 print modelName
                 obj = ''
                 exec ("obj = " + modelName + ".objects.get(pk=objectID)")
-                print obj
+                #print obj
                 if request.method == "POST":
                     tempTableName = tableName.capitalize()
                     exec ('form = ' + tempTableName + 'Form(request.POST, instance=obj)')

@@ -84,7 +84,7 @@ class skillbook(models.Model):
 	#local skill modifications here?
 
 	def __str__(self):
-		return self.skill_owner
+		return  self.skill_owner.__str__()
 
 class inventory(models.Model):
 	item_base = models.ForeignKey(item, on_delete=models.CASCADE)
@@ -92,13 +92,16 @@ class inventory(models.Model):
 	# local item modifications here?
 
 	def __str__(self):
-		return self.item_owner
+		return self.item_owner.__str__()
 
 
 class configs(models.Model):
 	database_ver = models.FloatField()
 	game_ver = models.FloatField(default=0.1)
 	exp_mult = models.FloatField(default=1)
+
+	def __str__(self):
+		return '[' + self.database_ver.__str__() + "|" + self.game_ver.__str__() + "|" +  self.exp_mult.__str__() +']'
 
 class logs(models.Model):
 	date = models.DateTimeField()

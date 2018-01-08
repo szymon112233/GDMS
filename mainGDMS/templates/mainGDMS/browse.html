@@ -63,7 +63,6 @@
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.name}}</td>
                   <td>{{obj.spriteID}}</td>
-                  <td>{{obj.skills}}</td>
                 {% elif name == 'skills' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.name}}</td>
@@ -76,15 +75,15 @@
                 {% elif name == 'players' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.user_id}}</td>
-                {% elif name == 'characters' %}
+                {% elif name == 'character' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.name}}</td>
-                  <td>{{obj.owner_id}}</td>
+                  <td>{{obj.owner}}</td>
                 {% elif name == 'config' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.database_ver}}</td>
                   <td>{{obj.game_ver}}</td>
-                  <td>{{obj.exp_mmult}}</td>
+                  <td>{{obj.exp_mult}}</td>
                 {% elif name == 'locale' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.default_transl}}</td>
@@ -92,8 +91,8 @@
                   <td>{{obj.pl_transl}}</td>
                 {% elif name == 'inv' %}
                   <th scope="row">{{obj.id}}</th>
-                  <td>{{obj.item_base_id}}</td>
-                  <td>{{obj.item_owner_id}}</td>
+                  <td>{{obj.item_base}}</td>
+                  <td>{{obj.item_owner}}</td>
                 {% elif name == 'enemies' %}
                   <th scope="row">{{obj.id}}</th>
                   <td>{{obj.name}}</td>
@@ -105,8 +104,8 @@
                   <td>{{obj.chase_range}}</td>
                 {% elif name == 'skillbook' %}
                   <th scope="row">{{obj.id}}</th>
-                  <td>{{obj.skill_base_id}}</td>
-                  <td>{{obj.skill_owner_id}}</td>
+                  <td>{{obj.skill_base}}</td>
+                  <td>{{obj.skill_owner}}</td>
                 {%endif%}
                   <td><a href=/edit/{{name}}_{{obj.id}}><span class="glyphicon glyphicon-pencil"></span></a>/
                   <a href=/remove/{{name}}_{{obj.id}}><span class="glyphicon glyphicon-trash"></span></a></td>
