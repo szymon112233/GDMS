@@ -33,7 +33,10 @@ def browseTable(request, tableName = None):
         for field in fieldsTouple:
             if not isinstance(field, (ManyToManyRel, ManyToOneRel, OneToOneRel, ManyToManyField, )):
                 print field
-                collumns.append(field)
+                collumn = field.__str__().split('.')[-1]
+                collumn = collumn.capitalize()
+                print collumn
+                collumns.append(collumn)
 
         args = {'name': tableName, 'viewName': tableName.capitalize(), 'collumns': collumns, 'data': data}
         return render(request, 'mainGDMS/browse.html', args)
