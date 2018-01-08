@@ -102,3 +102,5 @@ ENV/
 
 \.idea/
 Temp/
+logs/gdms.log.1
+logs/gdms.log.2
