@@ -15,9 +15,9 @@
 			<h1>Dodaj/edytuj element {{name}}</h1>
     		<form method="POST" class="enemy-form">{% csrf_token %}
         	{{ form.as_p }}
-        		<button type="submit" class="save btn btn-default">Save</button>
-				<button type="reset" class="save btn btn-default">Reset</button>
-				<button type="button" onclick="window.location.href='/browse'" class="save btn btn-default">Discard</button>
+        		<button type="submit" class="save btn btn-default">Zapisz</button>
+				<button type="reset" class="save btn btn-default">Resetuj</button>
+				<button type="button" onclick="window.location.href='/browse'" class="save btn btn-default">Odrzuć</button>
 			</form>
 </body>
 
