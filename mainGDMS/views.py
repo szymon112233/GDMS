@@ -9,6 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from mainGDMS.models import *
 from mainGDMS.forms import *
+from django.core import serializers
+from django.http import HttpResponse
+from django.http import JsonResponse
 
 
 def index(request):
@@ -110,7 +113,6 @@ def tryRemoveRecord(request, whatToRemove = None):
     else:
         return render(request, 'mainGDMS/confirm.html',{'whatToRemove': whatToRemove} )
 
-
 @login_required(login_url='/')
 def removeRecord(request, whatToRemove = None):
     user = request.user
@@ -134,11 +136,15 @@ def removeRecord(request, whatToRemove = None):
         else:
             return render(request, 'mainGDMS/404.html')
 
-
 def showLogout(request):
     if request.user is not None and request.user.is_authenticated:
         logout(request)
         return render(request, 'mainGDMS/logout.html')
     else:
         return render(request, 'mainGDMS/login.html')
+
+def getData(request, whatToGet = None):
+    data = list(enemy.objects.values())
+    return JsonResponse(data, safe=False)
+
 
